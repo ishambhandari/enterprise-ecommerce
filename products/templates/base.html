@@ -1,0 +1,81 @@
+{% load static %}{% load bootstrap5%} {%bootstrap_css%} {%bootstrap_javascript%}
+<html>
+  <head>
+    <title>Shoe Store</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+      header {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      nav li {
+        float: left;
+      }
+      nav li a {
+        display: block;
+        color: #fff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      nav li a:hover {
+        background-color: #ddd;
+      }
+      nav .login {
+        float: right;
+      }
+      nav .cart {
+        float: right;
+      }
+      .logo-image {
+        width : 500px;
+        height: 500px;
+      }
+      .search-box{
+        text-align: center;
+        margin:5px;
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+          <li><a href="#">Shoe Shop</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Products</a></li>
+          <li class="login"><a href="#">Login</a></li>
+          <li class="cart">
+            <a href="#"
+              ><i class="fa fa-shopping-cart" style="font-size: 26px"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class = "search-box">
+    <form action="/search" method="get">
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="q" />
+      <button type="submit">Search</button>
+    </form>
+    </div>
+    <main>
+      {% block content %} {% endblock %}
+    </main>
+  </body>
+</html>

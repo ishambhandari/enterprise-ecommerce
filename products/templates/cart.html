@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+<h1>Shopping Cart</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Product 1</td>
+      <td>$10.00</td>
+      <td>1</td>
+      <td>$10.00</td>
+    </tr>
+    <tr>
+      <td>Product 2</td>
+      <td>$20.00</td>
+      <td>2</td>
+      <td>$40.00</td>
+    </tr>
+    <tr>
+      <td>Product 3</td>
+      <td>$15.00</td>
+      <td>3</td>
+      <td>$45.00</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Total:</td>
+      <td>$95.00</td>
+    </tr>
+  </tfoot>
+</table>
+{% endblock %}
