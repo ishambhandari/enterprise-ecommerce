@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesomefree',
+    'authuser',
     'products',
     'bootstrap5',
 ]
+AUTH_USER_MODEL =  'authuser.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

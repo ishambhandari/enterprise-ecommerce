@@ -1,0 +1,28 @@
+{% extends "login.html" %} {% block content%}
+  <body>
+    <div class="container">
+      <div class="login form">
+        {% if user.is_authenticated%}
+        <p style = "margin:10px">ALready logged in</p>
+        <a href = {% url 'products'%} class = "button wrapper">Go to Products</a>
+        <a href = {% url 'logout'%} class = "button wrapper ">logout</a>
+        {% else %}
+      <div class="registration form">
+        <header>Signup</header>
+        <form method="POST" >
+          {% csrf_token %}
+          {{form.as_p}}
+        <input type="submit" value = "Signup" class = 'inputsign'>
+</form>
+        <div class="signup">
+          <span class="signup"
+            >Already have an account?
+            <label><a href = {% url 'login'%}>Login</a></label>
+          </span>
+        </div>
+      </div>
+        {%endif%}
+
+    </div>
+  </body>
+{% endblock %}

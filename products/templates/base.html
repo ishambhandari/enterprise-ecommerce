@@ -2,78 +2,120 @@
 <html>
   <head>
     <title>Shoe Store</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <style>
-      header {
-        background-color: #333;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-      nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      nav li {
-        float: left;
-      }
-      nav li a {
-        display: block;
-        color: #fff;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-      nav li a:hover {
-        background-color: #ddd;
-      }
-      nav .login {
-        float: right;
-      }
-      nav .cart {
-        float: right;
-      }
-      .logo-image {
-        width : 500px;
-        height: 500px;
-      }
-      .search-box{
-        text-align: center;
-        margin:5px;
 
-      }
+ <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+.contact-info{
+  font-size: 12px;
+}
+.nav-links{
+  font-size: 19px;
+  font-weight: 500;
+  color: #212934 !important;
+}
+.nav-links:hover{
+  color: green !important;
+}
+.nav-items{
+  margin-right: 100px;
+  padding: 5px;
+}
+.nav-icon{
+  margin-right: 15px;
+}
+.cart{
+  top: 1rem;
+  right: 3.4rem;
+  padding: 0px 6px;
+  font-size: small;
+  background: rgb(221, 221, 221);
+}
+.user{
+  top: 1rem;
+  right: 0.3rem;
+  padding: 0px 6px;
+  font-size: small;
+  background: rgb(221, 221, 221);
+}
+
     </style>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li>
-          <li><a href="#">Shoe Shop</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Products</a></li>
-          <li class="login"><a href="#">Login</a></li>
-          <li class="cart">
-            <a href="#"
-              ><i class="fa fa-shopping-cart" style="font-size: 26px"></i
-            ></a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div class = "search-box">
-    <form action="/search" method="get">
-      <label for="search">Search:</label>
-      <input type="text" id="search" name="q" />
-      <button type="submit">Search</button>
-    </form>
+<nav class="navbar navbar-expand-lg bg-dark">
+ <div class="container">
+  <div class="w-100 d-flex justify-content-between">
+   <div>
+     <i class="fa-solid fa-envelope text-light contact-info"></i>
+     <a href="" class="navbar-sm-brand text-light text-decoration-none
+            contact-info">
+          info@company.com
+     </a>
+     <i class="fa-solid fa-phone contact-info text-light"></i>
+     <a href="" class="navbar-sm-brand text-white text-decoration-none
+            contact-info">
+          010-020-8340
+     </a>
+   </div>
+          <div>
+            <a href="" class="text-white">
+                <i class="fa-brands fa-facebook me-2"></i></a>
+            <a href="" class="text-white">
+                <i class="fa-brands fa-instagram me-2"></i></a>
+            <a href="" class="text-white">
+                <i class="fa-brands fa-linkedin me-2"></i></a>
+            <a href="" class="text-white">
+                <i class="fa-brands fa-twitter me-2"></i></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container d-flex justify-content-between">
+      <div>
+        <h1 class="text-success">It's Code</h1>
+      </div>
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse">
+
+<div class=" bg-gray-200">
+      
+       <div class="container h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
+        <div class="relative">
+          <input type="text" class="h-14 w-96 pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search anything...">
+          <div class="absolute top-4 right-3" style= "display:inline-block"><i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+          </div>
+        </div>
+       </div>
     </div>
+
+              <a href="" class="text-decoration-none text-dark">
+                <i class="fa-regular fa-cart-shopping"></i>
+              </a>
+            <!-- <div class="position-absolute rounded-circle cart"> -->
+            <!--     <span>7</span> -->
+            <!-- </div> -->
+            <!-- <div class="position-absolute rounded-circle user"> -->
+            <!--     <span>+99</span> -->
+            <!-- </div> -->
+
+          </div>
+
+        </div>
+
+                <a class="nav-link nav-links" href={% url 'login_page'%}>
+        <button class = "btn btn-success">
+          Login/Signup
+        </button>
+                </a>
+      </nav>
+    </div>
+  </nav>
     <main>
       {% block content %} {% endblock %}
     </main>
