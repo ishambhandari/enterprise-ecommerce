@@ -1,11 +1,13 @@
 {% extends "base.html" %} {% block content%}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
   body {
     background: #7ed6df;
     transition: 0.6s linear;
   }
-  j .shoes-card {
-    width: 400px;
+   .shoes-card {
+     margin-top:30px;
+    width: 500px;
     background: #ecedef;
     padding: 40px;
     position: absolute;
@@ -23,9 +25,8 @@
     color: #bbb;
   }
   .shoes-pic {
-    background-image: url(1.png);
     width: 100%;
-    height: 200px;
+    height: 250px;
     background-size: cover;
     background-position: center;
     transition: 0.6s linear;
@@ -40,6 +41,7 @@
     width: 14px;
     height: 14px;
     margin: 0 10px;
+    margin-top:10px;
     border-radius: 50%;
     cursor: pointer;
     position: relative;
@@ -94,33 +96,47 @@
   <div class="shoes-card">
     <h1>Original Color Shoes</h1>
     <p>Shoes with different color and background</p>
-    <div class="shoes-pic"></div>
+
+
+<div class="shoes-pic" style="background-image: url('{{ product_instance.display_image }}');"></div>
     <div class="shoes-colors">
-      <span
-        class="blue active"
-        data-color="#7ed6df"
-        data-pic="url(https://i.imgur.com/oRpXTOq.png)"
-      ></span>
-      <span
-        class="green"
-        data-color="#badc58"
-        data-pic="url(https://i.imgur.com/iyx4e9c.png)"
-      ></span>
-      <span
-        class="yellow"
-        data-color="#f9ca24"
-        data-pic="url(https://i.imgur.com/kzsklN4.png)"
-      ></span>
-      <span
-        class="rose"
-        data-color="#ff7979"
-        data-pic="url(https://i.imgur.com/iVJjW92.png)"
-      ></span>
+
+{% for images in image_urls%}
+        <span class="blue active" data-color="#7ed6df" data-pic="url({{images.image_url}})"></span>
+{% endfor %}
+      
+      <!-- <span -->
+      <!--   class="green" -->
+      <!--   data-color="#badc58" -->
+      <!--   data-pic="url(https://i.imgur.com/iyx4e9c.png)" -->
+      <!-- ></span> -->
+      <!-- <span -->
+      <!--   class="yellow" -->
+      <!--   data-color="#f9ca24" -->
+      <!--   data-pic="url(https://i.imgur.com/kzsklN4.png)" -->
+      <!-- ></span> -->
+      <!-- <span -->
+      <!--   class="rose" -->
+      <!--   data-color="#ff7979" -->
+      <!--   data-pic="url(https://i.imgur.com/iVJjW92.png)" -->
+      <!-- ></span> -->
     </div>
     <div class="shoes-info">
-      <div class="shoes-price">$90</div>
+      <div class="shoes-price">£{{product_instance.price}}</div>
       <a href="#" class="shoes-button">Add to Cart</a>
     </div>
   </div>
 </div>
+<script>
+$(document).ready(function(){
+      $(".shoes-colors span").click(function(){
+        $(".shoes-colors span").removeClass("active");
+        $(this).addClass("active");
+        $("body").css("background",$(this).attr("data-color"));
+        $(".shoes-price").css("color",$(this).attr("data-color"))
+        $(".shoes-button").css("color",$(this).attr("data-color"));
+        $(".shoes-pic").css("background-image",$(this).attr("data-pic"));
+      })
+      });
+</script>
 {% endblock %}

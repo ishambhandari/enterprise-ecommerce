@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from products.models import Product
+from django.shortcuts import render,get_object_or_404
+from products.models import Product, ProductImage
 from django.core.paginator import Paginator
 
 
@@ -10,6 +10,11 @@ def products(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'products.html', {'page_obj': page_obj})
 
-# def products_detail(request):
+def products_detail(request,id):
+    product_instance = get_object_or_404(Product, asin = id) 
+    image_urls = ProductImage.objects.filter(product= product_instance)
+    return render(request, "product_detail.html", {"product_instance": product_instance , "image_urls":image_urls})
+
+
 
 

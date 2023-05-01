@@ -8,41 +8,6 @@
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <style>
-.contact-info{
-  font-size: 12px;
-}
-.nav-links{
-  font-size: 19px;
-  font-weight: 500;
-  color: #212934 !important;
-}
-.nav-links:hover{
-  color: green !important;
-}
-.nav-items{
-  margin-right: 100px;
-  padding: 5px;
-}
-.nav-icon{
-  margin-right: 15px;
-}
-.cart{
-  top: 1rem;
-  right: 3.4rem;
-  padding: 0px 6px;
-  font-size: small;
-  background: rgb(221, 221, 221);
-}
-.user{
-  top: 1rem;
-  right: 0.3rem;
-  padding: 0px 6px;
-  font-size: small;
-  background: rgb(221, 221, 221);
-}
-
-    </style>
   </head>
   <body>
 <nav class="navbar navbar-expand-lg bg-dark">
@@ -107,12 +72,22 @@
           </div>
 
         </div>
+        {% if user.is_authenticated%}
+      <div class="dropdown">
+        <div class="customer-icon"><i class="fa fa-user" style = "margin-top:16px"></i></div>
+        <div class="dropdown-menu">
+          <a href="#">My Account</a>
+          <a href={%url "logout"%}>Logout</a>
+        </div>
+      </div>
+      {% else %}
 
                 <a class="nav-link nav-links" href={% url 'login_page'%}>
         <button class = "btn btn-success">
           Login/Signup
         </button>
                 </a>
+        {% endif %}
       </nav>
     </div>
   </nav>
@@ -120,4 +95,5 @@
       {% block content %} {% endblock %}
     </main>
   </body>
+
 </html>
