@@ -1,39 +1,93 @@
-{% extends "base.html" %} {% block content %}
-<h1>Shopping Cart</h1>
+{% extends 'base.html' %}
+
+{% block content %} 
+<style>
+  h1 {
+    font-size: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  td:last-child {
+    text-align: right;
+  }
+
+  .card {
+    background-color: #f2f2f2;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+  }
+</style>
+
+{% if user.is_authenticated %}
+
+{% if items %}
+<div class="card">
+  <h1>Total: £{{ order.get_cart_total }}</h1>
+<a href="{% url 'checkout'%}"><button style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Proceed to checkout</button></a>
+</div>
 <table>
   <thead>
     <tr>
       <th>Product</th>
       <th>Price</th>
       <th>Quantity</th>
-      <th>Subtotal</th>
     </tr>
   </thead>
   <tbody>
+    {% for item in items %}
     <tr>
-      <td>Product 1</td>
-      <td>$10.00</td>
-      <td>1</td>
-      <td>$10.00</td>
+      <td><img src="{{item.product.display_image}}" alt="shoes image" style="height:150px"/></td>
+      <td>£{{item.product.price}}</td>
+      <td>
+
+<button onClick = "reload()" class="quantity-button update-cart" data-action="remove" data-product="{{ item.product.asin }}">-</button>
+
+        <span class="quantity">{{ item.quantity }}</span>
+<button onClick = "reload()" class="quantity-button update-cart" data-action="add" data-product="{{ item.product.asin }}">+</button>
+      </td>
     </tr>
-    <tr>
-      <td>Product 2</td>
-      <td>$20.00</td>
-      <td>2</td>
-      <td>$40.00</td>
-    </tr>
-    <tr>
-      <td>Product 3</td>
-      <td>$15.00</td>
-      <td>3</td>
-      <td>$45.00</td>
-    </tr>
+    {% endfor %}
   </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3">Total:</td>
-      <td>$95.00</td>
-    </tr>
-  </tfoot>
 </table>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% else %}
+<p>You are not signed in.</p>
+{% endif %}
+
+<script> 
+  function reload(){
+    location.reload();
+  }
+</script>
 {% endblock %}
+

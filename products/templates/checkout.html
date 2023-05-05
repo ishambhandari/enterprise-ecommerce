@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <form method="POST">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </form>
+  {% else %}
+  <p>Please log in to place an order.</p>
+  {% endif %} {% endblock %}
+</div>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {%block content %}
+<style>
+  .card {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+</style>
+<div style="margin-top: 20px"></div>
+<div>
+  <a href="{% url 'products' %}"><button>Back</button></a>
+</div>
+<div class="card">
+  <h1>Account Information</h1>
+  <p>Welcome! Your email is</p>
+  <p>{{user.email}}</p>
+  <p>Your total spending is</p>
+  <span>{{total_spending}}</span>
+</div>
+
+{% endblock %}

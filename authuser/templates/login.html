@@ -81,39 +81,59 @@
     .inputsign :hover {
       text-decoration: underline;
     }
-    .wrapper{
-      background-color:#0303;
-      padding:10px;
+    .wrapper {
+      background-color: #0303;
+      padding: 10px;
       border-radius: 10px;
     }
+    .error-message {
+      color: #ff0000;
+      font-size: 14px;
+      margin-top: 10px;
+    }
   </style>
-    {%block content%}
+  {%block content%}
   <body>
+    <div style="margin: 20px">
+      <a href="{% url 'products' %}"><button>Back</button></a>
+    </div>
     <div class="container">
       <div class="login form">
-        {% if user.is_authenticated%}
-        <p style = "margin:10px">ALready logged in</p>
-        <a href = {% url 'products'%} class = "button wrapper">Go to Products</a>
-        <a href = {% url 'logout'%} class = "button wrapper ">logout</a>
+        {% if user.is_authenticated %}
+        <p style="margin: 10px">Already logged in</p>
+        <a href="{% url 'products'%}" class="button wrapper">Go to Products</a>
+        <a href="{% url 'logout'%}" class="button wrapper">logout</a>
         {% else %}
         <header>Login</header>
-        <form method="POST" action = {% url 'login' %}>
-          {% csrf_token %}
-          <input type="text" placeholder="Enter your email" name = "email" />
-          <input type="password" placeholder="Enter your password" name = "password"/>
+
+        {% if error_msg %}
+        <p style="color: red">{{ error_msg }}</p>
+        {% endif %}
+        <form method="POST" action="{% url 'login_page' %}">
+          {% csrf_token %} {% if messages %}
+          <div class="error-message">
+            {% for message in messages %} {{ message }} {% endfor %}
+          </div>
+          {% endif %}
+          <input type="text" placeholder="Enter your email" name="email" />
+          <input
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+          />
           <a href="#">Forgot password?</a>
           <input type="submit" class="button" value="Login" />
         </form>
         <div class="signup">
           <span class="signup"
             >Don't have an account?
-            <label><a href = {% url 'register' %}>Sign Up</a></label>
+            <label><a href="{% url 'register' %}">Sign Up</a></label>
           </span>
         </div>
-        {%endif%}
+        {% endif %}
       </div>
     </div>
   </body>
 
-        {%endblock%}
+  {%endblock%}
 </html>

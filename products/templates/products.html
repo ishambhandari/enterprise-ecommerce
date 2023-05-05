@@ -1,7 +1,6 @@
 {% extends "base.html" %} {% block content %} {% load static%}
     <link rel="stylesheet" href="{% static 'css/product.css' %}">
 <style>
-
 .main-photo {
   background-image: url("{% static 'images/shoes.jpeg' %}");
   background-size: cover;
@@ -9,6 +8,8 @@
   height: 550px;
 }
 </style>
+
+{% csrf_token %}
   {% if not page_obj.has_previous %}
       <div class="main-photo"></div>
   {% endif %}
@@ -30,7 +31,7 @@
 								<div id="product-1" class="single-product">
                     <div class="part-1" style="background: url('{{ product.display_image}}') no-repeat center; background-size: contain">
 												<ul>
-														<li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                          <li><a data-product="{{ product.asin }}" data-action="add" class = "update-cart"><i class="fas fa-shopping-cart"></i></a></li>
                             <li><a href="{% url 'products_detail' id=product.asin %}" style = "margin-top:5px">View</a></li>
 												</ul>
 										</div>

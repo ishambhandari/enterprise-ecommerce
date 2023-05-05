@@ -3,9 +3,11 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth import authenticate, login,logout
 from .models import User
+from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from .forms import CustomUserCreationForm
-# Create your views here.
+from django.contrib import messages
+
 
 class UserRegistrationView(CreateView):
     form_class = CustomUserCreationForm
@@ -15,10 +17,16 @@ class UserRegistrationView(CreateView):
     def form_valid(self, form):
         form.instance.password = make_password(form.cleaned_data.get('password'))
         return super().form_valid(form)
-
+    
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        messages.error(self.request, 'Please correct the errors below.')
+        return response
 
 
 def login_view(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -27,16 +35,13 @@ def login_view(request):
             login(request, user)
             return redirect('products')  # Redirect to the home page after successful login
         else:
-            print("erroe")
-            error_msg = 'Invalid login credentials. Please try again.'
-            return render(request, 'login.html', {'error_msg': error_msg})
-    else:
-        return render(request, 'login.html')
+            messages.error(request, 'Invalid login credentials. Please try again.')
+            return render(request, 'login.html')
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('login_page')
 
-def login_page(request):
-    return render(request, "login.html")
+# def login_page(request):
+#     return render(request, "login.html")
 
