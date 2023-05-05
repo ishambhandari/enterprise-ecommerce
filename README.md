@@ -23,7 +23,7 @@ There are two apps: one for authentication and another for products. The authent
 
 The ER diagram below shows the models in the Django application. The product application includes a list feature and details. Products can be added to cart and checked out. Customers can see their details, and if a customer has `is_staff` status, they can access the dashboard page. The dashboard page displays sales numbers and a pie chart to show customer demographics.
 
-![ER diagram of models in Django application](/path/to/er-diagram.png)
+![ER diagram of models in Django application](products__models.png)
 
 ## URLs
 
