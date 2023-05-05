@@ -41,3 +41,8 @@ The ER diagram below shows the models in the Django application. The product app
 - `/users/login_page` - login page
 - `/users/register_page` - register page
 - `/users/logout` - logs a user out
+
+## Deployment
+
+The app is deployed to Render. It is setup with CI/CD with the deploy branch. Commiting new changes to this branch will trigger a deploy
+The deployed url is `https://ecommerce-s6wq.onrender.com/`
