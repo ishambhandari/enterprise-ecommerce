@@ -11,7 +11,9 @@
 
 {% csrf_token %}
   {% if not page_obj.has_previous %}
+  {% if queried %}
       <div class="main-photo"></div>
+      {% endif %}
   {% endif %}
 <section class="section-products">
 		<div class="container">

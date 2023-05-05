@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from products.models import Order
 
-@login_required
+@login_required()
 def detail(request):
     orders = Order.objects.filter(customer=request.user, completed=True)
     total_spending = sum([order.get_cart_total for order in orders])
