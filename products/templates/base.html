@@ -7,6 +7,9 @@
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+
   </head>
   <body>
 <nav class="navbar navbar-expand-lg bg-dark">
@@ -83,12 +86,14 @@
               </a>
               {% endif%}
         {% if user.is_authenticated%}
+        
       <div class="dropdown">
-        <div class="customer-icon"><i class="fa fa-user" style = "margin-top:16px"></i></div>
-        <div class="dropdown-menu">
-          <a href="{% url 'account-detail' %}">My Account</a>
-          <a href={%url "logout"%}>Logout</a>
-        </div>
+        <a href = "{% url 'account-detail' %}"> <div class="customer-icon"><i class="fa fa-user" style = "margin-top:16px"></i></div></a>
+
+      <!--   <div class="dropdown-menu"> -->
+      <!--     <a href="{% url 'account-detail' %}">My Account</a> -->
+      <!--     <a href={%url "logout"%}>Logout</a> -->
+        <!-- </div> -->
       </div>
       {% else %}
 

@@ -1,4 +1,9 @@
 {% extends 'base.html' %} {%block content%}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.0/heatmap.min.js" integrity="sha512-FpvmtV53P/z7yzv1TAIVH7PNz94EKXs5aV6ts/Zi+B/VeGU5Xwo6KIbwpTgKc0d4urD/BtkK50IC9785y68/AA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 {% if request.user.is_staff%}
 <div
   class="offcanvas offcanvas-start sidebar-nav bg-dark"
@@ -85,62 +90,39 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 mb-3">
+      <div class="col-md-6 mb-6">
         <div class="card bg-primary text-white h-100">
-          <div class="card-body py-5">Primary Card</div>
+          <div class="card-body py-5">Total Income</div>
           <div class="card-footer d-flex">
-            View Details
+            {{total_price}}
             <span class="ms-auto">
               <i class="bi bi-chevron-right"></i>
             </span>
           </div>
         </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <div class="card bg-warning text-dark h-100">
-          <div class="card-body py-5">Warning Card</div>
-          <div class="card-footer d-flex">
-            View Details
-            <span class="ms-auto">
-              <i class="bi bi-chevron-right"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
+      <div class="col-md-6 mb-6">
         <div class="card bg-success text-white h-100">
-          <div class="card-body py-5">Success Card</div>
+          <div class="card-body py-5">Total Number of Sales</div>
           <div class="card-footer d-flex">
-            View Details
+            {{total_items_sold}}
             <span class="ms-auto">
               <i class="bi bi-chevron-right"></i>
             </span>
           </div>
         </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <div class="card bg-danger text-white h-100">
-          <div class="card-body py-5">Danger Card</div>
-          <div class="card-footer d-flex">
-            View Details
-            <span class="ms-auto">
-              <i class="bi bi-chevron-right"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12 mb-3">
         <div class="card h-100">
           <div class="card-header">
             <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-            Area Chart Example
+            Customers by different countries in the UK 
           </div>
           <div class="card-body">
-            <canvas class="chart" width="100%" height="200"></canvas>
+<canvas id="myChart" style="height: 300px; width: 600px"></canvas>
           </div>
-        </div>
+
       </div>
     </div>
     <div class="row">
@@ -154,4 +136,48 @@
   
 <div>You are not allowed to view this page. Permission Staff required</div>
 {% endif%}
+<script>
+// Retrieve data from backend
+var data = {
+    "ENGLAND": {{ dictionary.ENGLAND }},
+    "WALES": {{ dictionary.WALES }},
+    "SCOTLAND": {{ dictionary.SCOTLAND }},
+    "NORTHERN_IRELAND": {{ dictionary.NORTHERN_IRELAND }}
+};
+
+// Create a pie chart
+var ctx = document.getElementById("myChart").getContext("2d");
+var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: Object.keys(data),
+        datasets: [{
+            data: Object.values(data),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: false,
+    }
+});
+
+// THis is leaflet
+
+</script>
+
+
 {% endblock %}
+
